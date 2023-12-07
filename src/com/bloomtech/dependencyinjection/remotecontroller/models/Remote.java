@@ -1,17 +1,17 @@
 package com.bloomtech.dependencyinjection.remotecontroller.models;
 
 public class Remote {
-    private final IRemote remoteObject;
+    private final TV tv;
 
-    public Remote(IRemote remoteObject) {
-        this.remoteObject = remoteObject;
+    public Remote() {
+        this.tv = new TV();
     }
 
     public void power() {
-        remoteObject.onPower();
+        tv.turnOn();
     }
 
     public void adjuster1(boolean up) {
-        remoteObject.onAdjuster1(up);
+        tv.adjustVolume(up);
     }
 }
