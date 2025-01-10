@@ -1,13 +1,19 @@
 package com.bloomtech.dependencyinjection.remotecontroller.models;
 
-public class TV {
+import com.bloomtech.dependencyinjection.remotecontroller.additionaldependencies.StreamingDevice;
+
+public class TV implements IRemote {
     private boolean on;
     private int volume;
-    private final int MAX_VOLUME = 0;
+    private final int MAX_VOLUME = 10;
 
-    public TV() {
+    private StreamingDevice streamingDevice;
+
+    public TV(StreamingDevice streamingDevice) {
         on = false;
         volume = 5;
+
+        this.streamingDevice = streamingDevice;
     }
 
     public void turnOn() {
@@ -27,5 +33,15 @@ public class TV {
         volume = Math.min(volume, MAX_VOLUME);
 
         System.out.println("Volume: " + volume);
+    }
+
+    @Override
+    public void onPower() {
+        turnOn();
+    }
+
+    @Override
+    public void onAdjuster1(boolean up) {
+        adjustVolume(up);
     }
 }
